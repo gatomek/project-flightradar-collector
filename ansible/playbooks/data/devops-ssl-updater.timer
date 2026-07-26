@@ -1,0 +1,10 @@
+[Unit]
+Description=DevOps {{app_name}} SSL updater timer (1h)
+
+[Timer]
+OnCalendar=*-*-* *:00:00
+Persistent=true
+RandomizedDelaySec=1m
+
+[Install]
+WantedBy=timers.target
