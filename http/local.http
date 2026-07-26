@@ -1,9 +1,18 @@
 ### GET request to localhost
+# @name Get Request for logs to 127.0.0.1
 GET http://127.0.0.1:8080/logs
 
 ###
 
+### GET request to localhost -> Response Http Status 406 (NotAccepted)
+# @name Get Request for logs with content type of xml to 127.0.0.1
+GET http://127.0.0.1:8080/logs
+Accept: application/xml
+
+###
+
 ### GET request to localhost
+# @name Get Request for logs with content type of xml to localhost
 GET http://localhost:8080/logs
 
 ###
