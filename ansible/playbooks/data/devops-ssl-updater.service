@@ -1,0 +1,16 @@
+[Unit]
+Description=Devops {{app_name}} SSL updater
+Documentation=man:systemd.service(5)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/home/{{app_name}}/scripts
+ExecStart=/bin/bash /home/{{app_name}}/scripts/ssl-updater.sh
+TimeoutStartSec=600
+PrivateTmp=yes
+ProtectSystem=full
+ReadWritePaths=/home/{{app_name}}/app
+NoNewPrivileges=yes

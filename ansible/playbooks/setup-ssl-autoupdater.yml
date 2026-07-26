@@ -1,0 +1,48 @@
+- name: "Setup {{app_name}} SSL Autoupdater on castle"
+  vars_files:
+    - vars/prod.yml
+  gather_facts: no
+  hosts: castle
+  remote_user: "{{remote_admin}}"
+  become: true
+  become_method: sudo
+  tasks:
+    - name: "Create script folder /home/{{app_name}}/scripts"
+      file:
+        path: "/home/{{app_name}}/scripts"
+        state: directory
+        owner: "{{app_name}}"
+        group: "{{app_name}}"
+        mode: '0700'
+
+    - name: "Render local script file ssl-updater.sh to /home/{{app_name}}/scripts/"
+      template:
+        src: data/ssl-updater.sh
+        dest: "/home/{{app_name}}/scripts/ssl-updater.sh"
+        owner: "{{app_name}}"
+        group: "{{app_name}}"
+        mode: '0500'
+
+    - name: Render systemd devops-ssl-updater.service file to /etc/systemd/system/
+      template:
+        src: data/devops-ssl-updater.service
+        dest: "/etc/systemd/system/devops-{{app_name}}-ssl-updater.service"
+        owner: root
+        group: root
+
+    - name: Copy systemd devops-ssl-updater.timer file to /etc/systemd/system/
+      template:
+        src: data/devops-ssl-updater.timer
+        dest: "/etc/systemd/system/devops-{{app_name}}-ssl-updater.timer"
+        owner: root
+        group: root
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Restart timer
+      systemd:
+        name: "devops-{{app_name}}-ssl-updater.timer"
+        state: restarted
+        enabled: true
