@@ -1,7 +1,19 @@
 # Radar Collector
+
 Project flightradar collector
 
+## Dependency Check
+
+### OWASP
+* run manually
+```
+mvn clean install -P dependency-check -DnvdApiKey="NVD_API_KEY"
+```
+### GitHub Dependabot
+* configured at GitHub
+
 ## Links
+
 * https://medium.com/@ravinduperera1229/rabbitmq-with-spring-boot-1935ed42da6a
 * https://mosy.tech/blog/rabbitmq-json-spring-boot-amqp/
 * https://itnext.io/an-introduction-to-new-spring-rabbitmq-client-cbe7a83d7aa3
@@ -19,6 +31,7 @@ Project flightradar collector
 * https://www.cherryservers.com/blog/install-prometheus-ubuntu
 
 ## Analyzing journal
+
 ```
 journalctl -u radar-collector.service --since="1 hour ago"
 ```

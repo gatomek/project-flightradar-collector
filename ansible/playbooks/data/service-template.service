@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User={{app_name}}
-ExecStart=/usr/bin/java -jar /home/{{app_name}}/app/{{app_name}}.jar --spring.profiles.active=castle
+ExecStart=/usr/bin/java -jar /home/{{app_name}}/app/{{app_name}}.jar --spring.profiles.active=castle,auth
 WorkingDirectory=/home/{{app_name}}/app
 StandardOutput=journal
 StandardError=journal
