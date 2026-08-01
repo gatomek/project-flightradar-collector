@@ -1,0 +1,25 @@
+services:
+  collector-setup:
+    container_name: ansible_collector_setup
+    build:
+      context: .
+      dockerfile: ansible.Dockerfile
+    command: ansible-playbook -i inventory.ini playbooks/setup.yml
+  collector-restart:
+    container_name: ansible_collector_restart
+    build:
+      context: .
+      dockerfile: ansible.Dockerfile
+    command: ansible-playbook -i inventory.ini playbooks/restart.yml
+  collector-stop:
+    container_name: ansible_collector_stop
+    build:
+      context: .
+      dockerfile: ansible.Dockerfile
+    command: ansible-playbook -i inventory.ini playbooks/stop.yml
+  collector-start:
+    container_name: ansible_collector_start
+    build:
+      context: .
+      dockerfile: ansible.Dockerfile
+    command: ansible-playbook -i inventory.ini playbooks/start.yml
