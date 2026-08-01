@@ -3,7 +3,9 @@
 ## Tower
 
 ## Prerequisites
+
 * docker context `docker-on-tower` prepared on local machine with docker agent
+
 ```
 docker context create docker-on-tower --docker host=tcp://tower:2375
 ```
