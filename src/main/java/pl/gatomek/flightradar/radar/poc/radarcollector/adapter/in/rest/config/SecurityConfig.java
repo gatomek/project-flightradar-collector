@@ -9,10 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import pl.gatomek.flightradar.radar.poc.radarcollector.adapter.in.rest.filter.RequestIdLogFilter;
+import pl.gatomek.flightradar.radar.poc.radarcollector.adapter.in.rest.filter.UserLogFilter;
 
 import java.util.List;
 
@@ -41,6 +44,8 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource)
                 )
+                .addFilterAfter(new UserLogFilter(), BearerTokenAuthenticationFilter.class)
+                .addFilterAfter(new RequestIdLogFilter(), UserLogFilter.class)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
@@ -57,6 +62,8 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource)
                 )
+                .addFilterAfter(new UserLogFilter(), BearerTokenAuthenticationFilter.class)
+                .addFilterAfter(new RequestIdLogFilter(), UserLogFilter.class)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)

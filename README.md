@@ -2,6 +2,9 @@
 
 Project flightradar collector
 
+## Repo
+https://github.com/gatomek/project-flightradar-collector
+
 ## Dependency Check
 
 ### OWASP
@@ -29,6 +32,7 @@ mvn clean install -P dependency-check -DnvdApiKey="NVD_API_KEY"
 * https://www.baeldung.com/spring-boot-prometheus
 * https://www.youtube.com/watch?v=NtPpeK0h_pI
 * https://www.cherryservers.com/blog/install-prometheus-ubuntu
+* https://kariera.future-processing.pl/blog/exploring-spring-boot-and-spring-security-custom-token-based-authentication-of-rest-services-with-spring-security-and-pinch-of-spring-java-configuration-and-spring-integration-testing/
 
 ## Analyzing journal
 
