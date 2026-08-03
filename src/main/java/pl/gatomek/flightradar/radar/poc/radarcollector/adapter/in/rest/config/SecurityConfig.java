@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -62,7 +63,7 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource)
                 )
-                .addFilterAfter(new UserLogFilter(), BearerTokenAuthenticationFilter.class)
+                .addFilterAfter(new UserLogFilter(), SecurityContextHolderFilter.class)
                 .addFilterAfter(new RequestIdLogFilter(), UserLogFilter.class)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
