@@ -4,7 +4,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.util.StopWatch;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
@@ -17,14 +16,13 @@ public class TimeElapsedFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         ContentCachingResponseWrapper wrappedResponse = new ContentCachingResponseWrapper(response);
-        StopWatch sw = new StopWatch();
-        sw.start();
+
+        long startTime = System.currentTimeMillis();
 
         try {
             filterChain.doFilter(request, wrappedResponse);
         } finally {
-            sw.stop();
-            long elapsed = sw.getTotalTimeMillis();
+            long elapsed = System.currentTimeMillis() - startTime;
             wrappedResponse.setHeader(ELAPSED, String.valueOf(elapsed));
             wrappedResponse.copyBodyToResponse();
         }
