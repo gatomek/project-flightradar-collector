@@ -14,9 +14,7 @@ public class TimeElapsedFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         ContentCachingResponseWrapper wrappedResponse = new ContentCachingResponseWrapper(response);
-
         long startTime = System.currentTimeMillis();
 
         try {
